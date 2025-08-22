@@ -1,0 +1,25 @@
+{
+  "946865197757399040": {
+    "money": 0,
+    "xp": 56,
+    "level": 1,
+    "inventory": {
+      "Rock": 1,
+      "Rusty Nail": 1,
+      "Pebble": 2,
+      "Acorn": 1
+    },
+    "last_daily": 1755828384,
+    "bank": 0,
+    "achievements": []
+  },
+  "140821724172347396": {
+    "money": 100,
+    "xp": 0,
+    "level": 1,
+    "inventory": {},
+    "last_daily": 0,
+    "bank": 27600,
+    "achievements": []
+  }
+}
