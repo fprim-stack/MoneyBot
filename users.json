@@ -1,25 +1,35 @@
 {
   "946865197757399040": {
-    "money": 0,
-    "xp": 56,
-    "level": 1,
+    "money": 10041987699,
+    "xp": 520,
+    "level": 3,
     "inventory": {
-      "Rock": 1,
-      "Rusty Nail": 1,
-      "Pebble": 2,
-      "Acorn": 1
+      "Rubber Band": 1
     },
     "last_daily": 1755828384,
-    "bank": 0,
+    "bank": 1259699,
     "achievements": []
   },
-  "140821724172347396": {
-    "money": 100,
-    "xp": 0,
-    "level": 1,
-    "inventory": {},
+  "1228739992134750208": {
+    "money": 100099743040,
+    "xp": 129,
+    "level": 2,
+    "inventory": {
+      "Magnifying Glass": 1,
+      "Glass Marble": 3,
+      "Torn Card": 1,
+      "Copper Penny": 1,
+      "Brass Key": 1,
+      "Rubber Band": 1,
+      "Leather Pouch": 1,
+      "Feather": 1,
+      "Rock": 1,
+      "Leaf": 1,
+      "Plastic Bottle": 1,
+      "Coin Purse": 1
+    },
     "last_daily": 0,
-    "bank": 27600,
+    "bank": 0,
     "achievements": []
   }
 }
