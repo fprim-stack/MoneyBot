@@ -2415,4 +2415,4 @@ async def money(ctx, user_id: int, amount: int):
     await ctx.send(embed=embed)
 
 if __name__ == "__main__":   # 👈 prevents duplicate runs
-    bot.run("MTQwODIxNzI0MTcyMzQ3Mzk2MA.G1xC79.t0hmPD_O0ggzFK4VtWaVfhNqv-53aR2cEpwUWQ")
+    bot.run("TOKEN")
