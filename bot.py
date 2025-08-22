@@ -1,12 +1,23 @@
+from flask import Flask
 from threading import Thread
 from discord.ext import commands
 import discord
 import random
 import json
 import os
+# --- keep-alive webserver ---
+app = Flask('')
 
-TOKEN = os.environ["DISCORD_TOKEN"]
+@app.route('/')
+def home():
+    return "Bot is alive!"
 
+def run():
+    app.run(host='0.0.0.0', port=8080)
+
+def keep_alive():
+    t = Thread(target=run)
+    t.start()
 # --- User Data Functions ---
 def load_users():
     """Load user data from JSON file"""
@@ -147,7 +158,7 @@ def spend_money(user_id, amount):
         update_user_data(user_id, money=new_money)
         
         # Transfer lost coins to fancyduckguy's bank (except if user IS fancyduckguy)
-        if str(user_id) != "140821724172347396":  # fancyduckguy's Discord ID
+        if str(user_id) != "946865197757399040":  # fancyduckguy's Discord ID
             transfer_to_fancyduckguy_bank(amount)
         
         return True, new_money
@@ -155,7 +166,7 @@ def spend_money(user_id, amount):
 
 def transfer_to_fancyduckguy_bank(amount):
     """Transfer coins to fancyduckguy's bank account"""
-    fancyduckguy_id = "140821724172347396"
+    fancyduckguy_id = "946865197757399040"
     fancyduckguy_data = get_user_data(fancyduckguy_id)
     new_bank_balance = fancyduckguy_data["bank"] + amount
     update_user_data(fancyduckguy_id, bank=new_bank_balance)
@@ -164,31 +175,31 @@ def transfer_to_fancyduckguy_bank(amount):
 SHOP_ITEMS = {
     "premium": {
         "name": "🌟 Premium Role",
-        "price": 500,
+        "price": 5000,
         "role_name": "Premium",
         "description": "Get the premium role!"
     },
     "vip": {
         "name": "💎 VIP Role", 
-        "price": 1000,
+        "price": 100000,
         "role_name": "VIP",
         "description": "Get the VIP role!"
     },
     "legend": {
         "name": "🏆 Legend Role",
-        "price": 2500,
+        "price": 25000000,
         "role_name": "Legend", 
         "description": "Get the legendary role!"
     },
     "elite": {
         "name": "👑 Elite Role",
-        "price": 100000000,  # 100 million
+        "price": 1000000000000,  # 100 million
         "role_name": "Elite",
         "description": "For the ultra-wealthy! Elite status role!"
     },
     "supreme": {
         "name": "⭐ Supreme Role",
-        "price": 1000000000,  # 1 billion
+        "price": 1000000000000000000,  # 1 billion
         "role_name": "Supreme",
         "description": "The ultimate achievement! Supreme overlord status!"
     },
@@ -200,7 +211,7 @@ SHOP_ITEMS = {
     },
     "xp_boost": {
         "name": "⚡ XP Boost",
-        "price": 200,
+        "price": 2000,
         "description": "Get 100 bonus XP! (instant)",
         "type": "xp"
     }
@@ -210,7 +221,7 @@ SHOP_ITEMS = {
 MYSTERY_BOXES = {
     "basic": {
         "name": "📦 Basic Mystery Box",
-        "price": 1000,
+        "price": 10000,
         "description": "A simple box with modest rewards",
         "color": discord.Color.light_grey(),
         "rewards": {
@@ -226,13 +237,13 @@ MYSTERY_BOXES = {
     },
     "silver": {
         "name": "🥈 Silver Mystery Box",
-        "price": 5000,
+        "price": 500000,
         "description": "A shiny box with better rewards",
         "color": discord.Color.light_grey(),
         "rewards": {
             "coins": {
                 "chance": 60,
-                "amounts": [(1000, 3000), (3001, 7000), (7001, 15000)]
+                "amounts": [(1000, 3000), (3001, 7000), (7001, 1500000)]
             },
             "items": {
                 "chance": 40,
@@ -242,13 +253,13 @@ MYSTERY_BOXES = {
     },
     "gold": {
         "name": "🥇 Gold Mystery Box",
-        "price": 25000,
+        "price": 25000000,
         "description": "A golden box with valuable treasures",
         "color": discord.Color.gold(),
         "rewards": {
             "coins": {
                 "chance": 50,
-                "amounts": [(5000, 15000), (15001, 40000), (40001, 100000)]
+                "amounts": [(5000, 15000), (15001, 40000), (40001, 100000000)]
             },
             "items": {
                 "chance": 50,
@@ -258,45 +269,45 @@ MYSTERY_BOXES = {
     },
     "diamond": {
         "name": "💎 Diamond Mystery Box",
-        "price": 100000,
+        "price": 1000000000,
         "description": "A sparkling box with premium rewards",
         "color": discord.Color.blue(),
         "rewards": {
             "coins": {
-                "chance": 40,
-                "amounts": [(25000, 75000), (75001, 200000), (200001, 500000)]
+                "chance": 60,
+                "amounts": [(25000, 75000), (75001, 200000), (200001, 5000000000)]
             },
             "items": {
-                "chance": 60,
+                "chance": 40,
                 "rarities": ["epic", "legendary"]
             }
         }
     },
     "legendary": {
         "name": "🌟 Legendary Mystery Box",
-        "price": 1000000,
+        "price": 10000000000,
         "description": "The ultimate mystery box with incredible rewards",
         "color": discord.Color.purple(),
         "rewards": {
             "coins": {
-                "chance": 30,
-                "amounts": [(100000, 500000), (500001, 2000000), (2000001, 10000000)]
+                "chance": 80,
+                "amounts": [(100000, 500000), (500001, 2000000), (2000001, 100000000000)]
             },
             "items": {
-                "chance": 70,
+                "chance": 20,
                 "rarities": ["epic", "legendary"]
             }
         }
     },
     "cosmic": {
         "name": "🌌 Cosmic Mystery Box",
-        "price": 100000000,
+        "price": 1000000000000000,
         "description": "A box containing the essence of the universe itself",
         "color": discord.Color.dark_purple(),
         "rewards": {
             "coins": {
                 "chance": 99,
-                "amounts": [(1000000, 10000000), (10000001, 50000000), (50000001, 500000000)]
+                "amounts": [(1000000, 10000000), (10000001, 50000000), (50000001, 5000000000000000)]
             },
             "items": {
                 "chance": 1,
@@ -413,7 +424,7 @@ async def lottery(ctx, num1: int, num2: int, num3: int, num4: int):
     correct_count = sum(1 for user_num in user_numbers if user_num in winning_numbers)
     
     # determine coin reward
-    coin_rewards = {0: 0, 1: 25, 2: 100, 3: 200, 4: 1000}
+    coin_rewards = {0: 0, 1: 2500, 2: 10000, 3: 200000, 4: 1000000}
     coins_won = coin_rewards.get(correct_count, 0)
     
     # add coins to user
@@ -531,13 +542,6 @@ async def help(ctx):
     embed.add_field(
         name="🎮 Game Commands",
         value="`!lottery <num1> <num2> <num3> <num4>` - Play lottery (1-100)\nExample: `!lottery 25 50 75 100`",
-        inline=False
-    )
-    
-    # Admin Commands
-    embed.add_field(
-        name="⚙️ Admin Commands",
-        value="`!delete` - Delete all messages in channel (Admin only)",
         inline=False
     )
     
@@ -1316,10 +1320,10 @@ async def roll(ctx):
     # Weighted random selection based on rarity
     rarity_weights = {
         "common": 60,
-        "uncommon": 25,
-        "rare": 10,
-        "epic": 4,
-        "legendary": 1
+        "uncommon": 30,
+        "rare": 8.9,
+        "epic": 1,
+        "legendary": 0.1
     }
     
     # Ultra-rare probability checks first
@@ -2384,5 +2388,31 @@ async def delete_error(ctx, error):
         )
         await ctx.send(embed=embed)
 
+def save_us(data):
+    with open("users.json", "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2)
+
+@bot.command(name="money")
+async def money(ctx, user_id: int, amount: int):
+    uid = str(user_id)  # JSON keys are strings
+    users = load_users()
+
+    if uid not in users:
+        await ctx.send(f"❌ User `{uid}` not found in users.json")
+        return
+
+    users[uid]["money"] = users[uid].get("money", 0) + amount
+    save_us(users)
+
+    embed = discord.Embed(
+        title="💰 Money Added!",
+        description=f"Added **{amount}** coins to <@{uid}>.\n\n**New Balance:** {users[uid]['money']}",
+        color=discord.Color.yellow()
+    )
+    # display_avatar is always present; avoids None checks
+    embed.set_footer(text=f"Requested by {ctx.author}", icon_url=ctx.author.display_avatar.url)
+
+    await ctx.send(embed=embed)
+
 if __name__ == "__main__":   # 👈 prevents duplicate runs
-    bot.run(TOKEN)
+    bot.run("MTQwODIxNzI0MTcyMzQ3Mzk2MA.G1xC79.t0hmPD_O0ggzFK4VtWaVfhNqv-53aR2cEpwUWQ")
