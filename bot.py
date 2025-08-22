@@ -1,10 +1,11 @@
-from flask import Flask
 from threading import Thread
 from discord.ext import commands
 import discord
 import random
 import json
 import os
+
+TOKEN = os.environ["DISCORD_TOKEN"]
 
 # --- User Data Functions ---
 def load_users():
@@ -2384,4 +2385,4 @@ async def delete_error(ctx, error):
         await ctx.send(embed=embed)
 
 if __name__ == "__main__":   # 👈 prevents duplicate runs
-    bot.run("MTQwODIxNzI0MTcyMzQ3Mzk2MA.G1xC79.t0hmPD_O0ggzFK4VtWaVfhNqv-53aR2cEpwUWQ")
+    bot.run(TOKEN)
